@@ -6,7 +6,7 @@ public class GamblingSimulator {
      * As a Gambler Would Start with a Stake
      * of $100 Every Day and Bet
      * $1 Every Game .
-     *
+     * <p>
      * Here I am Initializing Static Variables
      */
 
@@ -22,28 +22,39 @@ public class GamblingSimulator {
 
         System.out.println("---Welcome To Gambling Simulator---");
 
-        /**Initializing random Variable
-         * Using random method
-         */
+        int Stake = EveryDayStake;
 
-        int random = (int)Math.floor(Math.random()*10) % 2;
+        while (Stake > 50 && Stake < 150) {
+            int random = (int) Math.floor(Math.random() * 10) % 2; //Initializing random Variable & Using random method
 
+            /**
+             * Here I am Taking if Statement to
+             * Decision-Making
+             *
+             * if random equals(bet=1)- "Win"
+             * or " Loose "
+             */
+
+            if (random == bet) {
+                Stake = Stake + 1;
+                System.out.println("You Win.");
+            }
+            else {
+                Stake = Stake - 1;
+                System.out.println("You Loose.");
+            }
+        }
         /**
-         * Here I am Taking if Statement to
-         * Decision-Making
-         *
-         * if random equals(bet=1)- "Win"
-         * or " Loose "
+         * if Statement to Decision Making
+         * Checks Player Resigned Due to Winning or Loosing.
          */
 
-        if (random==bet){
-
-            System.out.println("You Win.");
-        }
-        else{
-
-            System.out.println("You Loose.");
-        }
+        if (Stake==50){
+                System.out.println("Player Resigned Due to Loosing" +Stake);
+            }
+            else{
+                System.out.println("Player Resigned Due to Winning" +Stake);
+            }
 
 
         }
