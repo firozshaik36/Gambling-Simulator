@@ -51,7 +51,7 @@ public class GamblingSimulator {
                 }
                 /**
                  * if Statement to Decision-Making
-                 * Checks Player Resigned Due to Winning or Loosing.
+                 * 
                  */
 
                 if (Stake < EveryDayStake) {
