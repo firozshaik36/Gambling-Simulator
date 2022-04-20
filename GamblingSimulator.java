@@ -23,45 +23,51 @@ public class GamblingSimulator {
         System.out.println("---Welcome To Gambling Simulator---");
 
         int Stake = EveryDayStake;
+        int month = 1;
 
-        for(int i=0; i<=20; i++) {
-            int random = (int) Math.floor(Math.random() * 10) % 2; //Initializing random Variable & Using random method
+        while (month <= 12) {
+            int day = 1;
+            System.out.println("Month" + month);
 
-            /**
-             * Here I am Taking if Statement to
-             * Decision-Making
-             *
-             * if random equals(bet=1)- "Win"
-             * or " Loose "
-             */
+            while (day <= 30) {
+                Stake = EveryDayStake;
 
-            if (random == bet) {
-                Stake = Stake + 1;
-                System.out.println("You Win.");
+                int random = (int) Math.floor(Math.random() * 10) % 2; //Initializing random Variable & Using random method
+
+                /**
+                 * Here I am Taking if Statement to
+                 * Decision-Making
+                 *
+                 * if random equals(bet=1)- "Win"
+                 * or " Loose "
+                 */
+
+                if (random == bet) {
+                    Stake = Stake + 1;
+                    System.out.println("You Win.");
+                } else {
+                    Stake = Stake - 1;
+                    System.out.println("You Loose.");
+                }
+                /**
+                 * if Statement to Decision-Making
+                 * Checks Player Resigned Due to Winning or Loosing.
+                 */
+
+                if (Stake < EveryDayStake) {
+                    System.out.println("Day "+day+" lost by "+(EveryDayStake - Stake)+" rupees ");
+                } else {
+                    System.out.println("Day "+day+" won by " +(Stake - EveryDayStake)+" rupees ");
+                }
+                day++;
+
+
             }
-            else {
-                Stake = Stake - 1;
-                System.out.println("You Loose.");
-            }
-            System.out.println(Stake);
-
-        }
-        /**
-         * if Statement to Decision-Making
-         * Checks Player Resigned Due to Winning or Loosing.
-         */
-
-        if (Stake<EveryDayStake){
-                System.out.println("After 20 days Player lost by "+(EveryDayStake - Stake)+" rupees ");
-            }
-            else{
-                System.out.println("After 20 days Player won by " +(Stake - EveryDayStake)+" rupees ");
-            }
-
-
+            month++;
+            System.out.println();
         }
     }
-
+}
 
 
 
