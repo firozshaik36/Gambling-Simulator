@@ -2,6 +2,7 @@ package com.bridgelabz.GamblingSimulator;
 
 import java.util.Random;
 
+import java.util.Scanner;
 public class GamblingSimulator {
 
     /**
@@ -27,21 +28,22 @@ public class GamblingSimulator {
         int day = 1;
         int UnluckyDay = 1;
         int LuckyDay = 1;
-        int UnluckyMonth= 1;
+        int UnluckyMonth = 1;
         int LuckyMonth = 1;
         int LuckyDayMoney = EveryDayStake;
         int UnluckyDayMoney = EveryDayStake;
+        int MoneyEarnedInMonth = 0;
 
-        while (month<=12) {
+        while (month <= 12) {
             day = 1;
-            while(day<=30) {
+            while (day <= 30) {
                 Stake = EveryDayStake;
                 Random rand = new Random();
                 int dailyGamePlayed = rand.nextInt(10);
 
                 for (int i = 0; i < dailyGamePlayed; i++) {
 
-                    int randcheck = (int)Math.floor(Math.random()*10) % 2;//Initializing random Variable & Using random method
+                    int randcheck = (int) Math.floor(Math.random() * 10) % 2;//Initializing random Variable & Using random method
 
                     /**
                      * Here I am Taking if Statement to
@@ -51,37 +53,35 @@ public class GamblingSimulator {
                      * or " Loose "
                      */
 
-                    if (randcheck==bet) {
+                    if (randcheck == bet) {
                         Stake = Stake + 1;
                         System.out.println("You Win.");
-                    }
-                    else {
+                    } else {
                         Stake = Stake - 1;
                         System.out.println("You Loose.");
                     }
+                    day++;
+                    MoneyEarnedInMonth = MoneyEarnedInMonth + Stake;
                 }
                 /**
                  * if Statement to Decision-Making
                  *
                  */
+                if (MoneyEarnedInMonth > Stake * 30) {
+                    System.out.println("You have won in the month " + month + " with  money " + MoneyEarnedInMonth + " would you like to keep playing? 1 for no, 2 for yes ");
+                    Scanner sc = new Scanner(System.in);
+                    int choice = sc.nextInt();
+                    month++;
+                    if (choice == 1)
+                        break;
+                    else if (choice == 2) {
+                        continue;
+                    }
 
-                if(LuckyDayMoney<Stake){
-                    LuckyDay = day;
-                    LuckyMonth = month;
-                    LuckyDayMoney = Stake;
+            } else {
+                    System.out.println("You have lost in the month " + month + " with  money " + MoneyEarnedInMonth);
                 }
-
-                if(UnluckyDayMoney>Stake) {
-                    UnluckyDay = day;
-                    UnluckyMonth = month;
-                    UnluckyDayMoney = Stake;
-                }
-                day++;
             }
-            month++;
         }
-        System.out.println("Lucky Day "+LuckyDay+" in the month "+LuckyMonth+" Maximum money won is "+(LuckyDayMoney - Stake)+" rupees ");
-        System.out.println("Unlucky Day "+UnluckyDay+" in the month "+UnluckyMonth+" Maximum  money lost is " +(Stake - UnluckyDayMoney)+" rupees ");
     }
 }
-
