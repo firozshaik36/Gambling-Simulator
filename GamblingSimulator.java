@@ -1,5 +1,7 @@
 package com.bridgelabz.GamblingSimulator;
 
+import java.util.Random;
+
 public class GamblingSimulator {
 
     /**
@@ -9,7 +11,6 @@ public class GamblingSimulator {
      * <p>
      * Here I am Initializing Static Variables
      */
-
     public static final int EveryDayStake = 100;
     public static final int bet = 1;
 
@@ -21,53 +22,66 @@ public class GamblingSimulator {
          */
 
         System.out.println("---Welcome To Gambling Simulator---");
-
         int Stake = EveryDayStake;
         int month = 1;
+        int day = 1;
+        int UnluckyDay = 1;
+        int LuckyDay = 1;
+        int UnluckyMonth= 1;
+        int LuckyMonth = 1;
+        int LuckyDayMoney = EveryDayStake;
+        int UnluckyDayMoney = EveryDayStake;
 
-        while (month <= 12) {
-            int day = 1;
-            System.out.println("Month" + month);
-
-            while (day <= 30) {
+        while (month<=12) {
+            day = 1;
+            while(day<=30) {
                 Stake = EveryDayStake;
+                Random rand = new Random();
+                int dailyGamePlayed = rand.nextInt(10);
 
-                int random = (int) Math.floor(Math.random() * 10) % 2; //Initializing random Variable & Using random method
+                for (int i = 0; i < dailyGamePlayed; i++) {
 
-                /**
-                 * Here I am Taking if Statement to
-                 * Decision-Making
-                 *
-                 * if random equals(bet=1)- "Win"
-                 * or " Loose "
-                 */
+                    int randcheck = (int)Math.floor(Math.random()*10) % 2;//Initializing random Variable & Using random method
 
-                if (random == bet) {
-                    Stake = Stake + 1;
-                    System.out.println("You Win.");
-                } else {
-                    Stake = Stake - 1;
-                    System.out.println("You Loose.");
+                    /**
+                     * Here I am Taking if Statement to
+                     * Decision-Making
+                     *
+                     * if random equals(bet=1)- "Win"
+                     * or " Loose "
+                     */
+
+                    if (randcheck==bet) {
+                        Stake = Stake + 1;
+                        System.out.println("You Win.");
+                    }
+                    else {
+                        Stake = Stake - 1;
+                        System.out.println("You Loose.");
+                    }
                 }
                 /**
                  * if Statement to Decision-Making
-                 * 
+                 *
                  */
 
-                if (Stake < EveryDayStake) {
-                    System.out.println("Day "+day+" lost by "+(EveryDayStake - Stake)+" rupees ");
-                } else {
-                    System.out.println("Day "+day+" won by " +(Stake - EveryDayStake)+" rupees ");
+                if(LuckyDayMoney<Stake){
+                    LuckyDay = day;
+                    LuckyMonth = month;
+                    LuckyDayMoney = Stake;
+                }
+
+                if(UnluckyDayMoney>Stake) {
+                    UnluckyDay = day;
+                    UnluckyMonth = month;
+                    UnluckyDayMoney = Stake;
                 }
                 day++;
-
-
             }
             month++;
-            System.out.println();
         }
+        System.out.println("Lucky Day "+LuckyDay+" in the month "+LuckyMonth+" Maximum money won is "+(LuckyDayMoney - Stake)+" rupees ");
+        System.out.println("Unlucky Day "+UnluckyDay+" in the month "+UnluckyMonth+" Maximum  money lost is " +(Stake - UnluckyDayMoney)+" rupees ");
     }
 }
-
-
 
